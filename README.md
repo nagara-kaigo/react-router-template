@@ -1,87 +1,107 @@
-# Welcome to React Router!
+# React Router テンプレート
 
-A modern, production-ready template for building full-stack React applications using React Router.
+<div align="center">
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![shadcn/ui](https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)
 
-## Features
+**React Router v7** のシンプルな SPA テンプレート。  
+**shadcn/ui** がセットアップされており、**GitHub Actions** で **GitHub Pages** に簡単デプロイできます。
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+</div>
 
-## Getting Started
+## 📋 目次
 
-### Installation
+- [React Router テンプレート](#react-router-テンプレート)
+  - [📋 目次](#-目次)
+  - [✨ 特徴](#-特徴)
+  - [🚀 はじめ方](#-はじめ方)
+  - [💅 shadcn/ui の追加方法](#-shadcnui-の追加方法)
+  - [🌐 GitHub Pages にデプロイする](#-github-pages-にデプロイする)
+  - [⚙️ 自動デプロイの設定](#️-自動デプロイの設定)
 
-Install the dependencies:
+## ✨ 特徴
+
+- SPA モードの **React Router v7**
+- **shadcn/ui**
+- **GitHub Actions** による **GitHub Pages** へのデプロイ
+
+## 🚀 はじめ方
+
+1. **pnpm をインストールする**
+
+   ```bash
+   npm install -g pnpm
+   ```
+
+2. **必要なパッケージをインストールする**
+
+   ```bash
+   pnpm install
+   ```
+
+3. **開発サーバーを起動する**
+
+   ```bash
+   pnpm run dev
+   ```
+
+## 💅 shadcn/ui の追加方法
 
 ```bash
-npm install
+pnpm dlx shadcn@latest add <コンポーネント名>
 ```
 
-### Development
+詳細: [shadcn/ui コンポーネント一覧](https://ui.shadcn.com/docs/components/)
 
-Start the development server with HMR:
+## 🌐 GitHub Pages にデプロイする
 
-```bash
-npm run dev
+デプロイの設定は [github/workflows/deploy‑gh‑pages.yml](github/workflows/deploy‑gh‑pages.yml) にあります。
+
+1. リポジトリの Settings → Pages で、Source を GitHub Actions に設定します。
+2. 次のファイルにある `<YOUR_REPO_NAME>` を、実際のリポジトリ名に書き換えてください：
+
+`react-router.config.ts`
+
+```ts
+basename: import.meta.env.PROD ? "/<YOUR_REPO_NAME>" : "/",
 ```
 
-Your application will be available at `http://localhost:5173`.
+`vite.config.ts`
 
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
+```ts
+base: mode === "production" ? "/<YOUR_REPO_NAME>/" : undefined,
 ```
 
-## Deployment
+> [!NOTE]
+> 例：リポジトリが https://github.com/your‑name/my‑app の場合、
+> react-router.config.ts では `/my‑app`（最後のスラッシュなし）を、
+> vite.config.ts では `/my‑app/`（最後のスラッシュあり）を指定します。
 
-### Docker Deployment
+デフォルトでは、手動でデプロイする設定になっています。
+変更をプッシュしたら、Actions → Deploy to GitHub Pages → Run workflow でサイトを公開できます。
 
-To build and run using Docker:
+`https://<YOUR_GITHUB_USERNAME>.github.io/<YOUR_REPO_NAME>/`
 
-```bash
-docker build -t my-app .
+## ⚙️ 自動デプロイの設定
 
-# Run the container
-docker run -p 3000:3000 my-app
+`.github/workflows/deploy-gh-pages.yml`
+
+```yaml
+on:
+  workflow_dispatch: {} # ← 有効
+  # push:                 # ← コメントアウト
+  #   branches: [main]
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+main ブランチにプッシュするたびに自動でデプロイしたい場合は、上記の push 部分のコメントを外してコミットしてください。
 
 ---
 
-Built with ❤️ using React Router.
+<div align="center">
+
+HappyHacking 🎉
+
+</div>
